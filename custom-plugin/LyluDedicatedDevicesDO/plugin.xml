@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-lylu-dedicated-devices-do" version="1.0.0"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>LyluDedicatedDevicesDO</name>
+    <js-module name="LyluDedicatedDevicesDO" src="www/LyluDedicatedDevicesDO.js">
+        <clobbers target="cordova.plugins.LyluDedicatedDevicesDO"/>
+        <clobbers target="LyluDedicatedDevicesDO"/>
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="LyluDedicatedDevicesDO">
+                <param name="android-package"
+                       value="cordova.plugin.lylu.DedicatedDevices.LyluDedicatedDevicesDO"/>
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="com.android.alarm.per
+            HEDULE_EXACT_ALARM" />
+            <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+            <uses-permission android:name="android.permission.SET_WALLPAPER"/>
+            <uses-permission android:name="android.permission.CALL_PHONE"/>
+            <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+        </config-file>
+        <config-file parent="/manifest/application" target="AndroidManifest.xml">
+            <receiver
+                    android:name="app.lylu.app.DeviceOwner"
+                    android:label="@string/app_name"
+                    android:permission="android.permission.BIND_DEVICE_ADMIN">
+                <meta-data
+                        android:name="android.app.device_admin"
+                        android:resource="@xml/device_admin" />
+
+                <intent-filter>
+                    <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+                </intent-filter>
+            </receiver>
+        </config-file>
+        <config-file parent="/manifest/application/activity" target="AndroidManifest.xml">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </config-file>
+        <framework src="com.squareup.retrofit2:retrofit:2.6.2"/>
+        <framework src="com.squareup.retrofit2:converter-gson:2.1.0"/>
+        <framework src="me.weishu:free_reflection:3.0.1"/>
+        <framework src="com.tonyodev.fetch2:fetch2:3.0.12"/>
+        <source-file src="src/android/DeviceOwner.java"
+                     target-dir="src/app/lylu/app/"/>
+        <source-file src="src/android/DeviceOwnerPolicyEnforcer.java"
+                     target-dir="src/app/lylu/app"/>
+        <source-file src="src/android/DeviceOwnerModificationIntentReceiver.java"
+                     target-dir="src/app/lylu/app"/>
+        <source-file src="src/android/device_admin.xml"
+                     target-dir="res/xml"/>
+
+        <hook type="after_prepare" src="src/scripts/patch-main-activity.js"/>
+    </platform>
+</plugin>

@@ -1,0 +1,17 @@
+{
+  "name": "cordova-plugin-lylu-dedicated-devices-do",
+  "version": "1.0.0",
+  "description": "Device owner implementation for Lylu",
+  "cordova": {
+    "id": "cordova-plugin-lylu-dedicated-devices-do",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Lylu GmbH",
+  "license": "proprietary"
+}

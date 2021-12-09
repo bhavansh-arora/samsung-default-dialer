@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {PhoneService} from "../services/phone.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,15 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  phoneNumberInputValue = '';
 
+  constructor(private phoneService: PhoneService, private router: Router) {}
+
+  async placeCall() {
+    if (this.phoneNumberInputValue === '') {
+      return;
+    }
+    await this.phoneService.call(this.phoneNumberInputValue);
+    await this.router.navigate(['/phone/incall']);
+  }
 }

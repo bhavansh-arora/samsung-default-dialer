@@ -1,5 +1,7 @@
 {
   "name": "samsung-default-dialer",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

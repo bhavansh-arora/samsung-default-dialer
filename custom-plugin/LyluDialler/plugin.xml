@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-lylu-dialler" version="1.0"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>LyluDialler</name>
+    <js-module name="LyluDialler" src="www/LyluDialler.js">
+        <clobbers target="LyluDialler"/>
+        <clobbers target="cordova.plugins.LyluDialler"/>
+    </js-module>
+    <js-module name="LyluDiallerCallStatus" src="www/LyluDiallerCallStatus.js" >
+        <clobbers target="LyluDiallerCallStatus"/>
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="LyluDialler">
+                <param name="android-package" value="cordova.plugin.lylu.dialler.LyluDialler"/>
+            </feature>
+        </config-file>
+        <config-file parent="/manifest/application" target="AndroidManifest.xml">
+            <service
+                    android:name="cordova.plugin.lylu.dialler.CallService"
+                    android:permission="android.permission.BIND_INCALL_SERVICE">
+                <meta-data
+                        android:name="android.telecom.IN_CALL_SERVICE_UI"
+                        android:value="true" />
+                <intent-filter>
+                    <action android:name="android.telecom.InCallService" />
+                </intent-filter>
+            </service>
+        </config-file>
+        <config-file parent="/manifest/application/activity" target="AndroidManifest.xml">
+            <intent-filter>
+                <action android:name="android.intent.action.DIAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.DIAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <!-- Handle links in browsers -->
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tel" />
+            </intent-filter>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml"></config-file>
+        <source-file src="src/android/LyluDialler.java" target-dir="src/cordova/plugin/lylu/dialler"/>
+        <source-file src="src/android/CallService.java" target-dir="src/cordova/plugin/lylu/dialler"/>
+    </platform>
+</plugin>

@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'phone/incall',
+    loadChildren: () => import('./incall/incall.module').then(m => m.IncallPageModule)
+  },
 ];
 
 @NgModule({

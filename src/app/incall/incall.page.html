@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>incall</ion-title>
+
+    <ion-button (click)="handleTouchConfirmEndCall()">End call</ion-button>
+    <ion-button (click)="handleToggleMicrophone()">{{isMicrophoneMuted ? 'Mute' : 'Unmute'}} microphone</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <a>{{callStatusText}}</a>
+</ion-content>
